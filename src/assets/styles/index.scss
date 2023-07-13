@@ -1,0 +1,14 @@
+@import "components/settings";
+@import "components/vars";
+@import "components/normalize.css";
+
+body {
+  color: var(--color-white);
+  background-color: var(--color-dark-background);
+  height: auto;
+}
+
+#root {
+  margin: auto 0;
+  height: 100%;
+}

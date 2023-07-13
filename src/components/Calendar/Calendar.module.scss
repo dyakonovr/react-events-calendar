@@ -1,0 +1,17 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 40px auto;
+  border-top: 1px solid var(--color-dark-border);
+  border-left: 1px solid var(--color-dark-border);
+  min-height: calc(100vh - 40px);
+}
+
+.header_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--color-dark-border);
+  border-bottom: 1px solid var(--color-dark-border);
+  font-weight: bold;
+}

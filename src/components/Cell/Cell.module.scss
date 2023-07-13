@@ -1,0 +1,36 @@
+.cell {
+  display: flex;
+  justify-content: center;
+  border-right: 1px solid var(--color-dark-border);
+  border-bottom: 1px solid var(--color-dark-border);
+}
+
+.date {
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-date-cell-hover);
+  }
+
+  &_current {
+    background-color: var(--color-current-date-cell);
+
+    &:hover {
+      background-color: var(--color-current-date-cell-hover);
+    }
+  }
+
+  &_inactive {
+    opacity: 0.3;
+  }
+}
