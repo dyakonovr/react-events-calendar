@@ -4,7 +4,7 @@
   grid-template-rows: 40px auto;
   border-top: 1px solid var(--color-dark-border);
   border-left: 1px solid var(--color-dark-border);
-  min-height: calc(100vh - 40px);
+  height: calc(100% - 70px - 20px); // 70px - высота хедера
 }
 
 .header_item {

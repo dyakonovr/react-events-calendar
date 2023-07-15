@@ -1,0 +1,16 @@
+.today_button {
+  border: 1px solid var(--color-white);
+  border-radius: 10px;
+  padding: 5px 30px;
+  // width: 150px;
+  // height: 30px;
+  color: var(--color-white);
+  background: transparent;
+  transition: background 0.15s ease-in-out, color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-black);
+    background: var(--color-white);
+  }
+}

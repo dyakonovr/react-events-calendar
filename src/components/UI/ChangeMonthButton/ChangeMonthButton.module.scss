@@ -1,0 +1,16 @@
+.change_month_button {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}

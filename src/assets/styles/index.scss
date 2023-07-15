@@ -3,9 +3,11 @@
 @import "components/normalize.css";
 
 body {
+  display: flex;
+  flex-direction: column;
   color: var(--color-white);
-  background-color: var(--color-dark-background);
-  height: auto;
+  background-color: var(--color-black);
+  // height: 100vh;
 }
 
 #root {
