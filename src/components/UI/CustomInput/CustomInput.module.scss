@@ -1,0 +1,17 @@
+.input {
+  --border-bottom-color: #383838;
+  --border-bottom-color-active: #b146ea;
+
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--border-bottom-color);
+  margin: 0 0 15px;
+  padding: 10px 0;
+  font-size: 18px;
+  color: var(--color-white);
+  background-color: transparent;
+
+  &:active, &:focus {
+    border-color: var(--border-bottom-color-active);
+  }
+}

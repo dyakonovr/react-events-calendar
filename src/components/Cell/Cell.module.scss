@@ -1,6 +1,6 @@
 .cell {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   border-right: 1px solid var(--color-dark-border);
   border-bottom: 1px solid var(--color-dark-border);
 }
@@ -8,13 +8,15 @@
 .date {
   position: relative;
   z-index: 2;
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
+  align-self: center;
+  font-size: 12px;
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
 
@@ -33,4 +35,13 @@
   &_inactive {
     opacity: 0.3;
   }
+}
+
+.event {
+  margin: 3px 5px;
+  padding: 5px;
+  border-radius: 15px;
+  font-size: 11px;
+  color: var(--color-white);
+  background-color: var(--color-current-date-cell);
 }

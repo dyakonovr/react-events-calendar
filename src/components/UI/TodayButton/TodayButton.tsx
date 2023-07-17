@@ -9,7 +9,9 @@ function TodayButton() {
       className={classes.today_button}
       onClick={setCurrentMonth}
       type="button"
-    >Сегодня</button>
+    >
+      Сегодня      
+    </button>
   );
 };
 

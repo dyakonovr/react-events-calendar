@@ -1,6 +1,6 @@
-import classes from './Header.module.scss';
 import ChangeMonthPanel from "../ChangeMonthPanel/ChangeMonthPanel";
 import TodayButton from "../UI/TodayButton/TodayButton";
+import classes from './Header.module.scss';
 
 function Header() {
   return (

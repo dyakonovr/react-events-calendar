@@ -5,13 +5,15 @@ import classes from './ChangeMonthPanel.module.scss';
 
 function ChangeMonthPanel() {
   const month = useMonthStore(state => state.month);
+  const year = useMonthStore(state => state.year);
+
   const setNextMonth = useMonthStore(state => state.setNextMonth);
   const setPrevMonth = useMonthStore(state => state.setPrevMonth);
 
   return (
     <div className={classes.change_month_panel}>
       <ChangeMonthButton isLeftButton={true} handleFunc={setPrevMonth} />
-      <div>{MonthsArray[month]}</div>
+      <div className={classes.date}>{MonthsArray[month]} {year}</div>
       <ChangeMonthButton isLeftButton={false} handleFunc={setNextMonth} />
     </div>
   );

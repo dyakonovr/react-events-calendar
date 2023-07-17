@@ -1,17 +1,18 @@
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 40px auto;
+  grid-template-rows: 20px auto;
   border-top: 1px solid var(--color-dark-border);
   border-left: 1px solid var(--color-dark-border);
-  height: calc(100% - 70px - 20px); // 70px - высота хедера
+  height: calc(100vh - 70px - 25px);
 }
 
 .header_item {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 5px;
   border-right: 1px solid var(--color-dark-border);
-  border-bottom: 1px solid var(--color-dark-border);
+  font-size: 12px;
   font-weight: bold;
 }

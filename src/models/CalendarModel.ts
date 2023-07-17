@@ -2,18 +2,33 @@ import { DaysArray } from "../enums/Days";
 import { getDaysInMonth } from './../utils/getDaysInMonth';
 import { CellModel } from "./CellModel";
 
+export interface IDateEvent {
+  date: string,
+  message: string,
+  time: string,
+}
+
 export class CalendarModel {
   cells: CellModel[];
-  monthId: number;
+  month: number;
+  year: number;
   headers = DaysArray;
+  events: IDateEvent[];
+  
+  date = new Date();
+  currentDate = this.date.getDate();
+  currentMonth = this.date.getMonth();
+  currentYear = this.date.getFullYear();
 
-  constructor(monthId: number) {
-    this.monthId = monthId;
+  constructor(month: number, year: number) {
+    this.month = month;
+    this.year = year;
     this.cells = [];
+    this.events = [];
   }
 
   public initialize() {
-    const daysInMonth = getDaysInMonth(this.monthId);
+    const daysInMonth = getDaysInMonth(this.month);
 
     this.addCellsOfPrevMonth();
     this.addCellsOfCurrentMonth(daysInMonth);
@@ -21,9 +36,8 @@ export class CalendarModel {
   }
 
   private addCellsOfPrevMonth() {
-    let firstDayOfMonth = new Date(2023, this.monthId, 1).getDay();
+    let firstDayOfMonth = new Date(2023, this.month, 1).getDay();
 
-    // console.log("month:", this.monthId, "firstDay:", firstDayOfMonth);
     // Если первый день месяца - понедельник
     if (firstDayOfMonth === 1) return;
     
@@ -31,33 +45,36 @@ export class CalendarModel {
     firstDayOfMonth = firstDayOfMonth || 7;
     
     // Иначе добавляем недостающие дни из прошлого месяца
-    const daysInPrevMonth = getDaysInMonth(this.monthId - 1);
-    // console.log(firstDayOfMonth, daysInPrevMonth);
-    for (let date = daysInPrevMonth - firstDayOfMonth + 2; date <= daysInPrevMonth; date++) {
-      this.cells.push(new CellModel(date, false, true));
+    const daysInPrevMonth = getDaysInMonth(this.month - 1);
+    
+    for (let day = daysInPrevMonth - firstDayOfMonth + 2; day <= daysInPrevMonth; day++) {
+      this.cells.push(new CellModel(day, this.month - 1, this.year, false, true));
     }
   }
 
   private addCellsOfCurrentMonth(daysInMonth: number) {
-    const currentDate = new Date().getDate();
-    const currentMonth = new Date().getMonth();
-
-    for (let date = 1; date <= daysInMonth; date++) {
-      const isCurrentDate = currentMonth === this.monthId && currentDate === date;
-      this.cells.push(new CellModel(date, isCurrentDate, false));
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isCurrentDate = this.currentDate === day
+        && this.currentMonth === this.month
+        && this.currentYear === this.year;
+      this.cells.push(new CellModel(day, this.month, this.year, isCurrentDate, false));
     }
   }
 
   private addCellsOfNextMonth(daysInMonth: number) {
-    const lastDayOfMonth = new Date(2023, this.monthId, daysInMonth).getDay();
+    const lastDayOfMonth = new Date(2023, this.month, daysInMonth).getDay();
     // Если последний день месяца - воскресенье
     if (lastDayOfMonth === 0) return;
 
-    console.log(lastDayOfMonth);
-
     // Иначе добавляем недостающие дни из следующего месяца
-    for (let date = 1; date <= 7 - lastDayOfMonth; date++) {
-      this.cells.push(new CellModel(date, false, true));
+    for (let day = 1; day <= 7 - lastDayOfMonth; day++) {
+      this.cells.push(new CellModel(day, this.month + 1, this.year, false, true));
     }
+  }
+
+  public addEvent(eventObject: IDateEvent) {
+    this.events.push(eventObject);
+
+    console.log(this.events);
   }
 }

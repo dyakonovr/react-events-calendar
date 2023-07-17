@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
 import Calendar from "./components/Calendar/Calendar";
 import Header from "./components/Header/Header";
-import { CalendarModel } from "./models/CalendarModel";
-import { useMonthStore } from "./store/useMonthStore";
+import Modal from "./components/Modal/Modal";
+import { useModalStore } from "./store/useModalStore";
 
 function App() {
-  const currentMonth = useMonthStore(state => state.month);
-  const [calendar, setCalendar] = useState(new CalendarModel(currentMonth));
-
-  useEffect(() => {
-    const calendar = new CalendarModel(currentMonth);
-    calendar.initialize();
-    setCalendar(calendar);
-  }, [currentMonth]);
+  const modalIsOpen = useModalStore(state => state.isOpen);
 
   return (
     <>
       <Header />
-      <Calendar calendar={calendar} />
+      <Calendar />
+      {modalIsOpen && <Modal />}
     </>
   );
 }

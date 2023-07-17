@@ -1,0 +1,72 @@
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &_wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--color-black);
+  }
+}
+
+.text {
+  font-size: 18px;
+  margin: 10px 0 0;
+}
+
+.button {
+  align-self: center;
+  border: 1px solid red;
+  margin: 20px 0 0;
+  padding: 10px;
+  color: var(--color-white);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.delete_button {
+  --button-size: 20px;
+
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: var(--button-size);
+  height: var(--button-size);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--button-size);
+    height: 1px;
+    background-color: var(--color-white);
+  }
+
+  &::before {
+    transform: translateY(calc(var(--button-size) / 2)) rotate(45deg);
+  }
+
+  &::after {
+    transform: translateY(calc(var(--button-size) / 2)) rotate(-45deg);
+  }
+}
