@@ -1,12 +1,31 @@
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer';
 
+interface IDateObject {
+  day: number,
+  month: number,
+  year: number
+}
+
 interface IModalState {
   isOpen: boolean,
-  toggleVisibility: () => void;
+  currentDate: IDateObject,
+  openModal: (dateObject: IDateObject) => void,
+  closeModal: () => void,
 }
+
+const date = new Date();
 
 export const useModalStore = create<IModalState>()(immer((set) => ({
   isOpen: false,
-  toggleVisibility: () => set(state => { state.isOpen = !state.isOpen; }),
+  currentDate: {
+    day: date.getDate(),
+    month: date.getMonth(),
+    year: date.getFullYear()
+  },
+  openModal: (dateObject: IDateObject) => set(state => {
+    state.isOpen = true;
+    state.currentDate = dateObject;
+  }),
+  closeModal: () => set(state => { state.isOpen = false; }),
 })));

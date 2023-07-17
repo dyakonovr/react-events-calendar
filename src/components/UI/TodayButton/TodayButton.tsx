@@ -1,4 +1,4 @@
-import { useMonthStore } from "../../../store/useMonthStore";
+import { useMonthStore } from "../../../store/useDateStore";
 import classes from './TodayButton.module.scss';
 
 function TodayButton() {

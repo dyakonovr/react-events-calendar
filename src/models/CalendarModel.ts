@@ -1,9 +1,11 @@
-import { DaysArray } from "../enums/Days";
+import { ShortDaysArray } from "../enums/Days";
 import { getDaysInMonth } from './../utils/getDaysInMonth';
 import { CellModel } from "./CellModel";
 
 export interface IDateEvent {
-  date: string,
+  day: number,
+  month: number,
+  year: number,
   message: string,
   time: string,
 }
@@ -12,7 +14,7 @@ export class CalendarModel {
   cells: CellModel[];
   month: number;
   year: number;
-  headers = DaysArray;
+  headers = ShortDaysArray;
   events: IDateEvent[];
   
   date = new Date();
@@ -57,6 +59,8 @@ export class CalendarModel {
       const isCurrentDate = this.currentDate === day
         && this.currentMonth === this.month
         && this.currentYear === this.year;
+      
+      // this.getEventsOfDate(day, this.month, this.year);
       this.cells.push(new CellModel(day, this.month, this.year, isCurrentDate, false));
     }
   }
@@ -72,9 +76,15 @@ export class CalendarModel {
     }
   }
 
-  public addEvent(eventObject: IDateEvent) {
-    this.events.push(eventObject);
+  // private getEventsOfDate(day: number, month: number, year: number) {
+  //   console.log("events: ", this.events);
+  //   const result = this.events.find((event) => event.day === day && event.month === month && event.year === year);
+  //   console.log(result);
+  //   // console.log(day, month, year);
+  // }
 
-    console.log(this.events);
-  }
+  // public addEvent(eventObject: IDateEvent) {
+  //   this.events.push(eventObject);
+  //   // console.log(this.events);
+  // }
 }

@@ -1,4 +1,4 @@
-enum Days {
+enum ShortDays {
   MONDAY = "Пн",
   TUESDAY = "Вт",
   WEDNESDAY = "Ср",
@@ -8,4 +8,15 @@ enum Days {
   SUNDAY = "Вс"
 };
 
-export const DaysArray = [Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY, Days.THURSDAY, Days.FRIDAY, Days.SATURDAY, Days.SUNDAY];
+enum FullDays {
+  MONDAY = "Понедельник",
+  TUESDAY = "Вторник",
+  WEDNESDAY = "Среда",
+  THURSDAY = "Четверг",
+  FRIDAY = "Пятница",
+  SATURDAY = "Суббота",
+  SUNDAY = "Воскресенье"
+};
+
+export const ShortDaysArray = [ShortDays.MONDAY, ShortDays.TUESDAY, ShortDays.WEDNESDAY, ShortDays.THURSDAY, ShortDays.FRIDAY, ShortDays.SATURDAY, ShortDays.SUNDAY];
+export const FullDaysArray = [FullDays.MONDAY, FullDays.TUESDAY, FullDays.WEDNESDAY, FullDays.THURSDAY, FullDays.FRIDAY, FullDays.SATURDAY, FullDays.SUNDAY];

@@ -1,5 +1,5 @@
 import { MonthsArray } from "../../enums/Months";
-import { useMonthStore } from "../../store/useMonthStore";
+import { useMonthStore } from "../../store/useDateStore";
 import ChangeMonthButton from "../UI/ChangeMonthButton/ChangeMonthButton";
 import classes from './ChangeMonthPanel.module.scss';
 

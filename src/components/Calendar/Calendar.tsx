@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { CalendarModel } from "../../models/CalendarModel";
 import { useCalendarStore } from "../../store/useCalendarStore";
-import { useMonthStore } from "../../store/useMonthStore";
+import { useMonthStore } from "../../store/useDateStore";
 import Cell from "../Cell/Cell";
 import classes from './Calendar.module.scss';
 
@@ -12,11 +12,18 @@ function Calendar() {
   const calendar = useCalendarStore(state => state.calendar);
   const updateCalendar = useCalendarStore(state => state.updateCalendar);
 
+  const [_, forceUpdate] = useReducer(x => x + 1, 0);
+  const events = useCalendarStore(state => state.events);
+
   useEffect(() => {
     const calendar = new CalendarModel(currentMonth, currentYear);
     calendar.initialize();
     updateCalendar(calendar);
   }, [currentMonth, currentYear]);
+
+  useEffect(() => {
+    forceUpdate()
+  }, [events]);
 
   // Функции
   function createHeaders() {
