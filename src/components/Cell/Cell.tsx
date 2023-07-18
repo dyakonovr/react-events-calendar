@@ -3,7 +3,11 @@ import { useCalendarStore } from "../../store/useCalendarStore";
 import { useModalStore } from "../../store/useModalStore";
 import classes from './Cell.module.scss';
 
-function Cell({ object }: { object: CellModel }) {
+interface ICellProps {
+  object: CellModel
+}
+
+function Cell({ object }: ICellProps) {
   const { day, month, year } = object;
 
   const openModal = useModalStore(state => state.openModal);
@@ -20,7 +24,15 @@ function Cell({ object }: { object: CellModel }) {
 
   function getEvents() {
     const result = events.filter((event) => event.day === day && event.month === month && event.year === year);
-    return result?.map((event) => <div className={classes.event}>{event.time} {event.message}</div>)
+    return result?.map(
+      (event) =>
+        <div
+        className={classes.event}
+        title={`${event.time} ${event.message}`}
+        key={Math.random()}>
+          {event.time} {event.message}
+        </div>
+    )
   }
   // Функции END
 

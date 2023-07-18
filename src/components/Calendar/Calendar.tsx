@@ -6,11 +6,11 @@ import Cell from "../Cell/Cell";
 import classes from './Calendar.module.scss';
 
 function Calendar() {
-  const currentMonth = useMonthStore(state => state.month);
-  const currentYear = useMonthStore(state => state.year);
-
   const calendar = useCalendarStore(state => state.calendar);
   const updateCalendar = useCalendarStore(state => state.updateCalendar);
+
+  const currentMonth = useMonthStore(state => state.month);
+  const currentYear = useMonthStore(state => state.year);
 
   const [_, forceUpdate] = useReducer(x => x + 1, 0);
   const events = useCalendarStore(state => state.events);
@@ -19,10 +19,10 @@ function Calendar() {
     const calendar = new CalendarModel(currentMonth, currentYear);
     calendar.initialize();
     updateCalendar(calendar);
-  }, [currentMonth, currentYear]);
+  }, [currentMonth]);
 
   useEffect(() => {
-    forceUpdate()
+    forceUpdate();
   }, [events]);
 
   // Функции
@@ -39,8 +39,10 @@ function Calendar() {
   }
   // Функции END
   
+  const gridTemplateRowsStyle = { gridTemplateRows: `20px repeat(${((calendar?.cells && calendar.cells.length / 7) || 5)}, 1fr` };
+
   return (
-    <div className={classes.calendar}>
+    <div className={classes.calendar} style={gridTemplateRowsStyle}>
       {createHeaders()}
       {createCells()}
     </div>

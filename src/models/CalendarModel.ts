@@ -43,7 +43,7 @@ export class CalendarModel {
     // Если первый день месяца - понедельник
     if (firstDayOfMonth === 1) return;
     
-    // Воскресенье даст нам 0 => for не запустится
+    // Воскресенье даст 0 => for не запустится
     firstDayOfMonth = firstDayOfMonth || 7;
     
     // Иначе добавляем недостающие дни из прошлого месяца
@@ -60,7 +60,6 @@ export class CalendarModel {
         && this.currentMonth === this.month
         && this.currentYear === this.year;
       
-      // this.getEventsOfDate(day, this.month, this.year);
       this.cells.push(new CellModel(day, this.month, this.year, isCurrentDate, false));
     }
   }
@@ -75,16 +74,4 @@ export class CalendarModel {
       this.cells.push(new CellModel(day, this.month + 1, this.year, false, true));
     }
   }
-
-  // private getEventsOfDate(day: number, month: number, year: number) {
-  //   console.log("events: ", this.events);
-  //   const result = this.events.find((event) => event.day === day && event.month === month && event.year === year);
-  //   console.log(result);
-  //   // console.log(day, month, year);
-  // }
-
-  // public addEvent(eventObject: IDateEvent) {
-  //   this.events.push(eventObject);
-  //   // console.log(this.events);
-  // }
 }

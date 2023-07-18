@@ -1,9 +1,12 @@
+import { useRef } from "react";
+import TimeField from 'react-simple-timefield';
 import { IDateEvent } from "../../models/CalendarModel";
 import { useCalendarStore } from "../../store/useCalendarStore";
 import { useModalStore } from "../../store/useModalStore";
 import { getDayName } from "../../utils/getDayName";
 import { getDeclensionedMonth } from "../../utils/getDeclensionedMonth";
 import CustomInput from "../UI/CustomInput/CustomInput";
+import TimePickerInput from "../UI/TimePickerInput/TimePickerInput";
 import classes from './Modal.module.scss';
 
 function Modal() {
@@ -11,6 +14,9 @@ function Modal() {
   const closeModal = useModalStore(state => state.closeModal);
   const currentDate = useModalStore(state => state.currentDate);
   const { day, month, year } = currentDate;
+
+  const eventInputRef = useRef<HTMLInputElement>(null);
+  const timePickerInputRef = useRef<TimeField>(null);
 
   // Функции
   function getFullDate() {
@@ -20,10 +26,18 @@ function Modal() {
   }
 
   function handleClick() {
+    const eventInput = eventInputRef.current as HTMLInputElement;
+    const timePickerInput = timePickerInputRef.current;
+
+    const eventInputValue = eventInput.value;
+    const timePickerInputValue = timePickerInput?.state.value;
+
+    if (!eventInputValue || !timePickerInputValue) return;
+
     const eventObject: IDateEvent = {
       day, month, year,
-      message: "Message",
-      time: "12:00"
+      message: eventInputValue,
+      time: timePickerInputValue
     };
 
     addEvent(eventObject);
@@ -41,9 +55,9 @@ function Modal() {
         >
         </button>
 
-        <CustomInput placeholder="Введите событие" />
+        <CustomInput placeholder="Введите событие" myRef={eventInputRef} />
         <p className={classes.text}>{getFullDate()}</p>
-        <p className={classes.text}>Время - 12:00</p>
+        <p className={classes.text}>Время - <TimePickerInput myRef={timePickerInputRef} /></p>
         
         <button
           className={classes.button}

@@ -1,15 +1,15 @@
-.input {
+.time_picker_input {
   border: none;
-  outline: none;
   border-bottom: 1px solid var(--input-border-bottom-color);
-  margin: 0 0 15px;
-  padding: 10px 0;
+  outline: none;
+  width: 60px !important;
+  padding: 5px;
   font-size: 18px;
   color: var(--color-white);
-  background-color: transparent;
+  background: transparent;
   transition: border-color 0.15s ease-in-out;
 
-  &:active, &:focus {
+  &:focus, &:active {
     border-color: var(--input-border-bottom-color-active);
   }
 }
