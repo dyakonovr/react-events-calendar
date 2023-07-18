@@ -1,0 +1,10 @@
+.change_theme_button {
+  border: none;
+  margin: 0 0 0 auto;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    fill: var(--secondary-color);
+  }
+}

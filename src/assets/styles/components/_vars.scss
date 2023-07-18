@@ -2,18 +2,25 @@
   // Цвета
   --color-black: #1b1b1b;
   --color-white: #fff;
-  --color-dark-border: rgba(255, 255, 255, 0.3);
 
   --input-border-bottom-color: #383838;
   --input-border-bottom-color-active: #b146ea;
 
   // Клетка даты
-  --color-date-cell-hover: #ffffff37;
   --color-current-date-cell: #b146ea;
   --color-current-date-cell-hover: #b866e4;
+}
 
-  // Размеры контейнера
-  // --content-width: var(--cell-size) * 8;
-  // --container-offset: 15px;
-  // --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
+[data-theme="dark"] {
+  --primary-color: var(--color-black);
+  --secondary-color: var(--color-white);
+  --color-border: rgba(255, 255, 255, 0.3);
+  --color-date-cell-hover: #ffffff37;
+}
+
+[data-theme="light"] {
+  --primary-color: var(--color-white);
+  --secondary-color: var(--color-black);
+  --color-border: rgba(5, 5, 5, 0.3);
+  --color-date-cell-hover: #2f2f2f37;
 }

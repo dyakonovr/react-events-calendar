@@ -21,7 +21,8 @@ body {
   min-width: 380px;
   min-height: 100%;
   font-size: 16px;
-  background-color: var(--color-site-background);
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 img {
@@ -32,7 +33,7 @@ img {
 
 a {
   text-decoration: none;
-  color: var(--color-black);
+  color: var(--secondary-color);
 }
 
 .root {
@@ -41,49 +42,6 @@ a {
 
 .main {
   flex: 1 1 auto;
-}
-
-.is-hidden {
-  display: none !important;
-}
-
-.btn-reset {
-  border: none;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.list-reset {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.input-reset {
-  -webkit-appearance: none;
-  appearance: none;
-  border: none;
-  border-radius: 0;
-  background-color: #fff;
-
-  &::-webkit-search-decoration,
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration {
-    display: none;
-  }
-}
-
-.visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  width: 1px;
-  height: 1px;
-  clip: rect(0 0 0 0);
 }
 
 .container {

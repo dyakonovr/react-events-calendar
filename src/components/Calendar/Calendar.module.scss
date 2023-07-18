@@ -1,8 +1,10 @@
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border-top: 1px solid var(--color-dark-border);
-  border-left: 1px solid var(--color-dark-border);
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+  margin: 0 auto;
+  width: calc(100% - 5px);
   height: calc(100vh - 70px - 25px);
 }
 
@@ -11,7 +13,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 5px;
-  border-right: 1px solid var(--color-dark-border);
+  border-right: 1px solid var(--color-border);
   font-size: 12px;
   font-weight: bold;
 }

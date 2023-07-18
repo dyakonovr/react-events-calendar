@@ -26,11 +26,8 @@ function Modal() {
   }
 
   function handleClick() {
-    const eventInput = eventInputRef.current as HTMLInputElement;
-    const timePickerInput = timePickerInputRef.current;
-
-    const eventInputValue = eventInput.value;
-    const timePickerInputValue = timePickerInput?.state.value;
+    const eventInputValue = (eventInputRef.current as HTMLInputElement).value;
+    const timePickerInputValue = (timePickerInputRef.current)?.state.value;
 
     if (!eventInputValue || !timePickerInputValue) return;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -9,5 +9,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Прописываю transition отдельно, чтобы он не срабатывал
+      // при загрузке страницы
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+          document.body.style.transition = "background-color 0.2s ease-in-out";
+        }, 1);
+      })
+    </script>
   </body>
 </html>

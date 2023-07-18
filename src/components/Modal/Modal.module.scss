@@ -19,7 +19,7 @@
     padding: 30px;
     max-width: 400px;
     width: 100%;
-    background-color: var(--color-black);
+    background-color: var(--primary-color);
   }
 }
 
@@ -33,7 +33,7 @@
   border: 1px solid red;
   margin: 20px 0 0;
   padding: 10px;
-  color: var(--color-white);
+  color: var(--secondary-color);
   background-color: transparent;
   cursor: pointer;
 }
@@ -59,7 +59,7 @@
     top: 0;
     width: var(--button-size);
     height: 1px;
-    background-color: var(--color-white);
+    background-color: var(--secondary-color);
   }
 
   &::before {
