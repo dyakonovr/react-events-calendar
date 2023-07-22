@@ -37,16 +37,3 @@
     opacity: 0.3;
   }
 }
-
-.event {
-  margin: 3px 5px;
-  padding: 5px;
-  border-radius: 15px;
-  font-size: 11px;
-  color: var(--color-white);
-  background-color: var(--color-current-date-cell);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: calc((100vw / 7) - 5px);
-}

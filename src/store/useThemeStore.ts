@@ -8,7 +8,7 @@ interface IThemeState {
 }
 
 export const useThemeStore = create<IThemeState>()(immer((set) => ({
-  theme: Theme.DARK,
+  theme: Theme.DEFAULT,
   setTheme: (theme: string) => set(state => {
     state.theme = theme;
     document.body.setAttribute("data-theme", theme);

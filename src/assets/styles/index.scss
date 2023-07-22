@@ -6,3 +6,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.change-theme-animation {
+  transition: background-color 0.2s ease-in-out;
+}

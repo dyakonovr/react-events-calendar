@@ -1,0 +1,18 @@
+.event {
+  margin: 3px 5px;
+  padding: 5px;
+  border-radius: 15px;
+  max-width: calc((100vw / 7) - 5px);
+  font-size: 11px;
+  color: var(--color-white);
+  background-color: var(--color-current-date-cell);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-current-date-cell-hover);
+  }
+}

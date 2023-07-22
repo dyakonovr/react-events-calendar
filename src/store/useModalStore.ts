@@ -1,11 +1,6 @@
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer';
-
-interface IDateObject {
-  day: number,
-  month: number,
-  year: number
-}
+import { IDateObject } from "../interfaces/IDateObject";
 
 interface IModalState {
   isOpen: boolean,

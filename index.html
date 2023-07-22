@@ -14,8 +14,8 @@
       // при загрузке страницы
       document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
-          document.body.style.transition = "background-color 0.2s ease-in-out";
-        }, 1);
+          document.body.classList.add("change-theme-animation");
+        }, 500);
       })
     </script>
   </body>

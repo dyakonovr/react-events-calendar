@@ -1,14 +1,7 @@
 import { ShortDaysArray } from "../enums/Days";
+import { IDateEvent } from "../interfaces/IEvent";
 import { getDaysInMonth } from './../utils/getDaysInMonth';
 import { CellModel } from "./CellModel";
-
-export interface IDateEvent {
-  day: number,
-  month: number,
-  year: number,
-  message: string,
-  time: string,
-}
 
 export class CalendarModel {
   cells: CellModel[];

@@ -3,13 +3,22 @@ import TimeField from 'react-simple-timefield';
 import classes from './TimePickerInput.module.scss';
 
 interface ITimePickerInputProps {
-  myRef: RefObject<TimeField>
+  myRef: RefObject<TimeField>,
+  initialTime: string,
 }
 
-function TimePickerInput({ myRef }: ITimePickerInputProps) {
-  const [value, setValue] = useState("12:00");
+function TimePickerInput({ myRef, initialTime }: ITimePickerInputProps) {
+  const [value, setValue] = useState( initialTime || getInitialTime() );
 
   // Функции
+  function getInitialTime() {
+    const hours = new Date().getHours();
+
+    if (hours === 23) return `00:00`;
+    if (hours < 10) return `0${hours + 1}:00`;
+    return `${hours + 1}:00`
+  }
+
   function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target as HTMLInputElement;
     setValue(input.value);
@@ -20,7 +29,7 @@ function TimePickerInput({ myRef }: ITimePickerInputProps) {
     input={<input className={classes.time_picker_input} />}
     value={value}
     ref={myRef}
-    onChange={(e) => { handleInput(e) }}
+    onChange={(e) => handleInput(e)}
    />
 };
 
