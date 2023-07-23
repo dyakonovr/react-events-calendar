@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import Calendar from "./components/Calendar/Calendar";
 import Header from "./components/Header/Header";
 import Modal from "./components/Modal/Modal";
+import NotificationsContainer from "./components/NotificationsContainer/NotificationsContainer";
 import { Theme } from "./enums/Theme";
 import { useModalStore } from "./store/useModalStore";
 import { useThemeStore } from "./store/useThemeStore";
@@ -20,6 +22,7 @@ function App() {
       <Header />
       <Calendar />
       {modalIsOpen && <Modal />}
+      <NotificationsContainer />
     </>
   );
 }

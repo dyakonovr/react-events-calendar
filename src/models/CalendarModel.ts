@@ -1,5 +1,5 @@
 import { ShortDaysArray } from "../enums/Days";
-import { IDateEvent } from "../interfaces/IEvent";
+import { IEvent } from "../interfaces/IEvent";
 import { getDaysInMonth } from './../utils/getDaysInMonth';
 import { CellModel } from "./CellModel";
 
@@ -8,7 +8,7 @@ export class CalendarModel {
   month: number;
   year: number;
   headers = ShortDaysArray;
-  events: IDateEvent[];
+  events: IEvent[];
   
   date = new Date();
   currentDate = this.date.getDate();

@@ -8,6 +8,7 @@ interface IEventsState {
   currentEventId: number,
   events: IEvent[],
   setIsModalForEdit: (eventForEditId: number) => void,
+  resetIsModalForEdit: () => void,
   addEvent: (eventObject: IEvent) => void,
   deleteEvent: (eventId: number) => void
 }
@@ -15,22 +16,22 @@ interface IEventsState {
 export const useEventsStore = create<IEventsState>()(immer((set) => ({
   isModalForEdit: false,
   eventForEditId: null,
-  currentEventId: 0,
+  currentEventId: 1,
   events: [],
   setIsModalForEdit: (eventForEditId: number) => set(state => {
     state.isModalForEdit = true;
-    state.eventForEditId = eventForEditId;    
+    state.eventForEditId = eventForEditId;
+  }),
+  resetIsModalForEdit: () => set(state => {
+    state.isModalForEdit = false;
+    state.eventForEditId = null;
   }),
   addEvent: (eventObject: IEvent) => set(state => {
     if (state.eventForEditId !== null) state.events = state.events.filter(event => event.id !== state.eventForEditId);
     state.events.push(eventObject);
     state.currentEventId++;
-    state.isModalForEdit = false;
-    state.eventForEditId = null;
   }),
   deleteEvent: (eventForDeleteId: number) => set(state => {
     state.events = state.events.filter(event => event.id !== eventForDeleteId);
-    state.isModalForEdit = false;
-    state.eventForEditId = null;
   }),
 })));

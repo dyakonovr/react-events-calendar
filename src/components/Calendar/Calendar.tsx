@@ -2,6 +2,7 @@ import { useEffect, useReducer } from 'react';
 import { CalendarModel } from "../../models/CalendarModel";
 import { useCalendarStore } from "../../store/useCalendarStore";
 import { useMonthStore } from "../../store/useDateStore";
+import { useEventsStore } from "../../store/useEventsStore";
 import Cell from "../Cell/Cell";
 import classes from './Calendar.module.scss';
 
@@ -13,13 +14,13 @@ function Calendar() {
   const currentYear = useMonthStore(state => state.year);
 
   const [_, forceUpdate] = useReducer(x => x + 1, 0);
-  const events = useCalendarStore(state => state.events);
+  const events = useEventsStore(state => state.events);
 
   useEffect(() => {
     const calendar = new CalendarModel(currentMonth, currentYear);
     calendar.initialize();
     updateCalendar(calendar);
-  }, [currentMonth]);
+  }, [currentMonth, new Date().getDate()]);
 
   useEffect(() => {
     forceUpdate();
