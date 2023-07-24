@@ -1,6 +1,6 @@
-import { MonthsArray } from "../../enums/Months";
-import { useMonthStore } from "../../store/useDateStore";
-import ChangeMonthButton from "../UI/ChangeMonthButton/ChangeMonthButton";
+import { MonthsArray } from "../../../enums/Months";
+import { useMonthStore } from "../../../store/useDateStore";
+import ChangeMonthButton from "../ChangeMonthButton/ChangeMonthButton";
 import classes from './ChangeMonthPanel.module.scss';
 
 function ChangeMonthPanel() {

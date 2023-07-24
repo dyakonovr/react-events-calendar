@@ -1,0 +1,31 @@
+.input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--input-border-bottom-color);
+  margin: 0 0 15px;
+  padding: 10px 0;
+  font-size: 18px;
+  color: var(--secondary-color);
+  background-color: transparent;
+  transition: border-color 0.15s ease-in-out;
+
+  &:active,
+  &:focus {
+    border-color: var(--input-border-bottom-color-active);
+  }
+}
+
+.button {
+  align-self: center;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-bottom-color);
+  padding: 10px;
+  color: var(--secondary-color);
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out;
+
+  &:hover {
+    border-color: var(--input-border-bottom-color-active);
+  }
+}

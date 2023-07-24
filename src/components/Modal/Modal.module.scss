@@ -28,22 +28,6 @@
   margin: 10px 0 0;
 }
 
-.button {
-  align-self: center;
-  border-radius: 5px;
-  border: 1px solid var(--input-border-bottom-color);
-  margin: 20px 0 0;
-  padding: 10px;
-  color: var(--secondary-color);
-  background-color: transparent;
-  cursor: pointer;
-  transition: border-color 0.15s ease-in-out;
-
-  &:hover {
-    border-color: var(--input-border-bottom-color-active);
-  }
-}
-
 .delete_button {
   --button-size: 20px;
 
@@ -82,4 +66,8 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+
+.button {
+  margin: 20px 0 0;
 }

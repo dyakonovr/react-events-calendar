@@ -1,7 +1,7 @@
-import { IDateObject } from "../../interfaces/IDateObject";
-import { IEvent } from "../../interfaces/IEvent";
-import { useEventsStore } from "../../store/useEventsStore";
-import { useModalStore } from "../../store/useModalStore";
+import { IDateObject } from "../../../interfaces/IDateObject";
+import { IEvent } from "../../../interfaces/IEvent";
+import { useEventsStore } from "../../../store/useEventsStore";
+import { useModalStore } from "../../../store/useModalStore";
 import classes from './Event.module.scss';
 
 interface IEventProps {

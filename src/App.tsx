@@ -1,30 +1,29 @@
 import { useEffect } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import Calendar from "./components/Calendar/Calendar";
-import Header from "./components/Header/Header";
-import Modal from "./components/Modal/Modal";
-import NotificationsContainer from "./components/NotificationsContainer/NotificationsContainer";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "./enums/Paths";
 import { Theme } from "./enums/Theme";
-import { useModalStore } from "./store/useModalStore";
+import "./firebase";
+import Pages from "./pages/Pages";
 import { useThemeStore } from "./store/useThemeStore";
+import { auth } from "./firebase";
+import { useUserStore } from "./store/useUserStore";
 
 function App() {
-  const modalIsOpen = useModalStore(state => state.isOpen);
+  const setUser = useUserStore(state => state.setUser);
   const setTheme = useThemeStore(state => state.setTheme);
+  const navigate = useNavigate();
 
-  useEffect(() => { 
+  useEffect(() => {
     const theme = localStorage.getItem("theme") || Theme.DEFAULT;
     setTheme(theme);
+
+    auth.onAuthStateChanged(user => {
+      if (user) setUser(user.refreshToken, user.uid, user.email || "");
+      else navigate(Paths.SIGN_UP);
+    });
   }, []);
 
-  return (
-    <>
-      <Header />
-      <Calendar />
-      {modalIsOpen && <Modal />}
-      <NotificationsContainer />
-    </>
-  );
+  return <Pages />;
 }
 
 export default App

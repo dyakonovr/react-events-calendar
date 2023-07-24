@@ -1,10 +1,14 @@
 import { useEffect, useReducer } from 'react';
+import Cell from "../Cell/Cell";
 import { CalendarModel } from "../../models/CalendarModel";
 import { useCalendarStore } from "../../store/useCalendarStore";
 import { useMonthStore } from "../../store/useDateStore";
 import { useEventsStore } from "../../store/useEventsStore";
-import Cell from "../Cell/Cell";
 import classes from './Calendar.module.scss';
+import { collection, getDocs } from "firebase/firestore";
+import { database } from "../../firebase";
+import { IEvent } from "../../interfaces/IEvent";
+import { useUserStore } from "../../store/useUserStore";
 
 function Calendar() {
   const calendar = useCalendarStore(state => state.calendar);
@@ -13,18 +17,46 @@ function Calendar() {
   const currentMonth = useMonthStore(state => state.month);
   const currentYear = useMonthStore(state => state.year);
 
-  const [_, forceUpdate] = useReducer(x => x + 1, 0);
-  const events = useEventsStore(state => state.events);
-
   useEffect(() => {
     const calendar = new CalendarModel(currentMonth, currentYear);
     calendar.initialize();
     updateCalendar(calendar);
   }, [currentMonth, new Date().getDate()]);
 
+  //////////////////////////////////////////////////////////////
+  
+  const [_, forceUpdate] = useReducer(x => x + 1, 0);
+  const events = useEventsStore(state => state.events);
+
+  console.log('events: ', events);
+
   useEffect(() => {
     forceUpdate();
   }, [events]);
+
+  //////////////////////////////////////////////////////////////
+
+  const eventsOfUserCollectionRef = collection(database, "events");
+  const addEventFromDatabase = useEventsStore(state => state.addEventsFromDatabase);
+  const userId = useUserStore(state => state.id);
+
+  useEffect(() => {
+    const getEvents = async () => {
+      const data = await getDocs(eventsOfUserCollectionRef);
+      const eventsArray: IEvent[] = [];
+      data.docs.map((doc) => {
+        if (doc.data().userId !== userId) return;
+        console.log(doc.id);
+        const { day, month, year, time, message } = doc.data();
+        const eventId: string = doc.id;
+        eventsArray.push({day, month, year, time, message, id: doc.id});
+      });
+
+      addEventFromDatabase(eventsArray);
+    }
+
+    getEvents();
+  }, [userId]);
 
   // Функции
   function createHeaders() {

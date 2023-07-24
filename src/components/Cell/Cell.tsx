@@ -2,7 +2,7 @@ import { IDateObject } from "../../interfaces/IDateObject";
 import { CellModel } from "../../models/CellModel";
 import { useEventsStore } from "../../store/useEventsStore";
 import { useModalStore } from "../../store/useModalStore";
-import Event from "../Event/Event";
+import Event from "../UI/Event/Event";
 import classes from './Cell.module.scss';
 
 interface ICellProps {
