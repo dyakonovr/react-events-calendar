@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Link } from "react-router-dom";
 import classes from "./Form.module.scss";
 
@@ -13,18 +13,6 @@ interface IFormProps {
 function Form({ title, buttonText, altText, altLink, handleClick }: IFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // useEffect(() => {
-  //   function handleKeyboardClick(key: string, email: string, password: string) {
-  //     if (key === 'Enter') handleClick(email, password);
-  //     return;
-  //   };
-
-  //   document.addEventListener('keydown', (e) => handleKeyboardClick(e.key, email, password));
-  //   return () => {
-  //     document.removeEventListener('keydown', (e) => handleKeyboardClick(e.key, email, password));
-  //   };
-  // }, []);
 
   return (
     <div className={classes.form}>

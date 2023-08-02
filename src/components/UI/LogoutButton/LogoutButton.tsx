@@ -4,6 +4,7 @@ import { useUserStore } from "../../../store/useUserStore";
 import { useNavigate } from 'react-router-dom';
 import { auth } from "../../../firebase";
 import { createToast } from "../../../utils/createToast";
+import { ToastMessages } from "../../../enums/ToastMessages";
 
 function LogoutButton() {
   const email = useUserStore(state => state.email);
@@ -14,6 +15,7 @@ function LogoutButton() {
   async function handleClick() {
     await signOut(auth).then(() => {
       resetUser();
+      createToast(ToastMessages.LOGOUT);
       navigate(Paths.SIGN_UP);
     }).catch((error) => { createToast(`Ошибка: ${error}`); })
   }

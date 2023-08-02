@@ -46,8 +46,17 @@ function Calendar() {
   }, []);
 
   //////////////////////////////////////////////////////////////
-
+  
+  const setCurrentMonth = useMonthStore(state => state.setCurrentMonth);
   const userId = useUserStore(state => state.id);
+
+  useEffect(() => { 
+    setCurrentMonth();
+  }, [userId]);
+
+  //////////////////////////////////////////////////////////////
+
+
   const addEventFromDatabase = useEventsStore(state => state.addEventsFromDatabase);
 
   useEffect(() => {

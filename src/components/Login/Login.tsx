@@ -5,6 +5,7 @@ import { createToast } from "../../utils/createToast";
 import { useNavigate } from 'react-router-dom';
 import { Paths } from "../../enums/Paths";
 import { auth } from "../../firebase";
+import { ToastMessages } from "../../enums/ToastMessages";
 
 function Login() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user.refreshToken, user.uid, user.email || "");
-        createToast(`Вы успешно вошли в аккаунт ${user.email}`);
+        createToast(`${ToastMessages.LOGIN} ${user.email}`);
         navigate(Paths.HOME);
       })
       .catch((error) => { createToast(`Ошибка: ${error.message}`); });

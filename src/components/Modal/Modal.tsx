@@ -29,10 +29,15 @@ function Modal() {
   const eventsOfUserCollectionRef = collection(database, "events");
   const userId = useUserStore(state => state.id);
 
+  const saveButtonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    function handleKeyboardClick({key}: {key: string}) {
-      if (key === "Escape") closeModalFunc();
-      if (key === 'Enter') handleSaveButtonClick();
+    function handleKeyboardClick(event: KeyboardEvent) {
+      if (event.key === "Escape") closeModalFunc();
+      if (event.key === "Enter") {
+        if(event.target === saveButtonRef.current) event.preventDefault(); // Предотвращаю двойной вызов функции (по клику на кнопку и на Enter)
+        handleSaveButtonClick();
+      }
       else return;
     };
 
@@ -106,7 +111,7 @@ function Modal() {
         <p className={classes.text}>Время - <TimePickerInput myRef={timePickerInputRef} initialTime={initialTime} /></p>
         
         <div className={classes.buttons_wrapper}>
-          <button className={[classes.button, "button"].join(' ')} type="button" onClick={handleSaveButtonClick}>Сохранить</button>
+          <button className={[classes.button, "button"].join(' ')} onClick={handleSaveButtonClick} ref={saveButtonRef} type="button">Сохранить</button>
           {isDeleteButtonIsShowed && <button
               className={[classes.button, "button"].join(' ')}
               type="button"

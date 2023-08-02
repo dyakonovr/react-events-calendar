@@ -4,7 +4,7 @@ import Modal from "../../components/Modal/Modal";
 import { useModalStore } from "../../store/useModalStore";
 
 function HomePage() {
-  const modalIsOpen = useModalStore(state => state.isOpen)
+  const modalIsOpen = useModalStore(state => state.isOpen);
 
   return (
     <>
