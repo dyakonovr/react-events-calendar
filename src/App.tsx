@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Paths } from "./enums/Paths";
 import { Theme } from "./enums/Theme";
 import "./firebase";
+import { auth } from "./firebase";
 import Pages from "./pages/Pages";
 import { useThemeStore } from "./store/useThemeStore";
-import { auth } from "./firebase";
 import { useUserStore } from "./store/useUserStore";
 
 function App() {

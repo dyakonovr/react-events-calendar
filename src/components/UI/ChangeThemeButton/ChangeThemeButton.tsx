@@ -1,6 +1,6 @@
 import { Theme } from "../../../enums/Theme";
 import { useThemeStore } from "../../../store/useThemeStore";
-import ChangeThemeButtonIcon from "../ChangeThemeButtonIcon/ChangeThemeButtonIcon";
+import ChangeThemeButtonIcon from "../../../assets/sprites/ChangeThemeButtonIcon";
 import classes from './ChangeThemeButton.module.scss';
 
 function ChangeThemeButton() {

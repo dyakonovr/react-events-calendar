@@ -6,10 +6,11 @@ import Event from "../UI/Event/Event";
 import classes from './Cell.module.scss';
 
 interface ICellProps {
-  object: CellModel
+  object: CellModel,
+  isCurrentDate: boolean
 }
 
-function Cell({ object }: ICellProps) {
+function Cell({ object, isCurrentDate }: ICellProps) {
   const { day, month, year } = object;
   const dateObject: IDateObject = { day, month, year };
 
@@ -17,15 +18,18 @@ function Cell({ object }: ICellProps) {
   const events = useEventsStore(state => state.events);
   
   const isInactiveCellClass = object.isInactiveDate ? classes.date_inactive : "";
-  const isCurrentDateClass = object.isCurrentDate ? classes.date_current : "";
+  const isCurrentDateClass = isCurrentDate ? classes.date_current : "";
 
   // Функции
   function getEvents() {
     const result = events.filter((event) => event.day === day && event.month === month && event.year === year);
     
     result.sort((objectA, objectB) => {
-      if (objectA.time > objectB.time) return 1;
-      if (objectA.time < objectB.time) return -1;
+      const timeA = `${objectA.hours}:${objectA.minutes}`;
+      const timeB = `${objectB.hours}:${objectB.minutes}`;
+
+      if (timeA > timeB) return 1;
+      if (timeA < timeB) return -1;
       return 0;
     });
 

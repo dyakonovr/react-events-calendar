@@ -10,11 +10,6 @@ export class CalendarModel {
   headers = ShortDaysArray;
   events: IEvent[];
   
-  date = new Date();
-  currentDate = this.date.getDate();
-  currentMonth = this.date.getMonth();
-  currentYear = this.date.getFullYear();
-
   constructor(month: number, year: number) {
     this.month = month;
     this.year = year;
@@ -43,17 +38,13 @@ export class CalendarModel {
     const daysInPrevMonth = getDaysInMonth(this.month - 1);
     
     for (let day = daysInPrevMonth - firstDayOfMonth + 2; day <= daysInPrevMonth; day++) {
-      this.cells.push(new CellModel(day, this.month - 1, this.year, false, true));
+      this.cells.push(new CellModel(day, this.month - 1, this.year, true));
     }
   }
 
   private addCellsOfCurrentMonth(daysInMonth: number) {
     for (let day = 1; day <= daysInMonth; day++) {
-      const isCurrentDate = this.currentDate === day
-        && this.currentMonth === this.month
-        && this.currentYear === this.year;
-      
-      this.cells.push(new CellModel(day, this.month, this.year, isCurrentDate, false));
+      this.cells.push(new CellModel(day, this.month, this.year, false));
     }
   }
 
@@ -64,7 +55,7 @@ export class CalendarModel {
 
     // Иначе добавляем недостающие дни из следующего месяца
     for (let day = 1; day <= 7 - lastDayOfMonth; day++) {
-      this.cells.push(new CellModel(day, this.month + 1, this.year, false, true));
+      this.cells.push(new CellModel(day, this.month + 1, this.year, true));
     }
   }
 }

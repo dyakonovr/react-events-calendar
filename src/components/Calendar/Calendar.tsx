@@ -1,14 +1,15 @@
-import { useEffect, useReducer } from 'react';
-import Cell from "../Cell/Cell";
-import { CalendarModel } from "../../models/CalendarModel";
-import { useCalendarStore } from "../../store/useCalendarStore";
-import { useMonthStore } from "../../store/useDateStore";
-import { useEventsStore } from "../../store/useEventsStore";
-import classes from './Calendar.module.scss';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect, useReducer, useState } from 'react';
 import { database } from "../../firebase";
 import { IEvent } from "../../interfaces/IEvent";
+import { CalendarModel } from "../../models/CalendarModel";
+import { useCalendarStore } from "../../store/useCalendarStore";
+import { useEventsStore } from "../../store/useEventsStore";
+import { useMonthStore } from "../../store/useMonthStore";
 import { useUserStore } from "../../store/useUserStore";
+import { createEventNotification } from "../../utils/createEventNotification";
+import Cell from "../Cell/Cell";
+import classes from './Calendar.module.scss';
 
 function Calendar() {
   const calendar = useCalendarStore(state => state.calendar);
@@ -17,18 +18,16 @@ function Calendar() {
   const currentMonth = useMonthStore(state => state.month);
   const currentYear = useMonthStore(state => state.year);
 
+  const [currentDate, setCurrentDate] = useState(new Date().getDate());
+
   useEffect(() => {
-    const calendar = new CalendarModel(currentMonth, currentYear);
-    calendar.initialize();
-    updateCalendar(calendar);
-  }, [currentMonth, new Date().getDate()]);
+    createNewCalendar();
+  }, [currentDate, currentMonth]); // currentDate для смены отметки сегодняшней клетки 
 
   //////////////////////////////////////////////////////////////
-  
+
   const [_, forceUpdate] = useReducer(x => x + 1, 0);
   const events = useEventsStore(state => state.events);
-
-  console.log('events: ', events);
 
   useEffect(() => {
     forceUpdate();
@@ -36,20 +35,35 @@ function Calendar() {
 
   //////////////////////////////////////////////////////////////
 
-  const eventsOfUserCollectionRef = collection(database, "events");
-  const addEventFromDatabase = useEventsStore(state => state.addEventsFromDatabase);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentDate(new Date().getDate());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  //////////////////////////////////////////////////////////////
+
   const userId = useUserStore(state => state.id);
+  const addEventFromDatabase = useEventsStore(state => state.addEventsFromDatabase);
 
   useEffect(() => {
+    const eventsOfUserCollectionRef = collection(database, "events");
+
     const getEvents = async () => {
-      const data = await getDocs(eventsOfUserCollectionRef);
+      const customQuery = query(eventsOfUserCollectionRef, where("userId", "==", userId));
+      const data = await getDocs(customQuery);
       const eventsArray: IEvent[] = [];
+
       data.docs.map((doc) => {
-        if (doc.data().userId !== userId) return;
-        console.log(doc.id);
-        const { day, month, year, time, message } = doc.data();
-        const eventId: string = doc.id;
-        eventsArray.push({day, month, year, time, message, id: doc.id});
+        const { day, month, year, hours, minutes, message } = doc.data();
+        const eventObject = { day, month, year, hours, minutes, message, id: doc.id };
+
+        const timeoutId = createEventNotification(eventObject);
+        eventsArray.push({ ...eventObject, timeoutId });
       });
 
       addEventFromDatabase(eventsArray);
@@ -59,6 +73,12 @@ function Calendar() {
   }, [userId]);
 
   // Функции
+  function createNewCalendar() {
+    const calendar = new CalendarModel(currentMonth, currentYear);
+    calendar.initialize();
+    updateCalendar(calendar);
+  }
+  
   function createHeaders() {
     return calendar?.headers.map((header) => {
       return <div className={classes.header_item} key={Math.random()}>{header}</div>
@@ -66,13 +86,16 @@ function Calendar() {
   }
   
   function createCells() {
+    const date = new Date();
+    const [currentDate, currentMonth, currentYear] = [date.getDate(), date.getMonth(), date.getFullYear()];
+
     return calendar?.cells.map((cell) => {
-      return <Cell object={cell} key={Math.random()} />
+      return <Cell object={cell} isCurrentDate={currentDate === cell.day && currentMonth === cell.month && currentYear === cell.year} key={Math.random()} />
     });
   }
   // Функции END
   
-  const gridTemplateRowsStyle = { gridTemplateRows: `20px repeat(${((calendar?.cells && calendar.cells.length / 7) || 5)}, 1fr` };
+  const gridTemplateRowsStyle = { gridTemplateRows: `20px repeat(${((calendar?.cells && calendar?.cells.length / 7) || 5)}, 1fr` };
 
   return (
     <div className={classes.calendar} style={gridTemplateRowsStyle}>

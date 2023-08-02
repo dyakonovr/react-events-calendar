@@ -23,9 +23,15 @@
   color: var(--secondary-color);
   background-color: transparent;
   cursor: pointer;
-  transition: border-color 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, color 0.15s ease-in-out;
 
   &:hover {
     border-color: var(--input-border-bottom-color-active);
+  }
+}
+
+[data-theme="light"] .button {
+  &:hover {
+    color: var(--input-border-bottom-color-active);
   }
 }

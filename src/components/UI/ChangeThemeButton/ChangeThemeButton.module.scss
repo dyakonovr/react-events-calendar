@@ -5,5 +5,13 @@
 
   svg {
     fill: var(--secondary-color);
+    transition: transform 0.3s ease-in-out;
+    backface-visibility: hidden;
+  }
+
+  &:hover {
+    svg {
+      transform: rotate(90deg);
+    }
   }
 }

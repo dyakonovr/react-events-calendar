@@ -13,6 +13,9 @@ function Event({ object, dateObject }: IEventProps) {
   const openModal = useModalStore(state => state.openModal);
   const setIsModalForEdit = useEventsStore(state => state.setIsModalForEdit);
 
+  const hours = object.hours >= 10 ? object.hours : `0${object.hours}`;
+  const minutes = object.minutes >= 10 ? object.minutes : `0${object.minutes}`;
+
   // Функции
   function handleClick() {
     setIsModalForEdit(object.id);
@@ -23,10 +26,10 @@ function Event({ object, dateObject }: IEventProps) {
   return (
     <div
       className={classes.event}
-      title={`${object.time} ${object.message}`}
+      title={`${hours}:${minutes} ${object.message}`}
       onClick={handleClick}
     >
-      {object.time} {object.message}
+      {hours}:{minutes} {object.message}
     </div>
   );
 };

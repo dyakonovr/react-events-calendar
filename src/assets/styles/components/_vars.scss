@@ -2,12 +2,13 @@
   // Цвета
   --color-black: #1b1b1b;
   --color-white: #fff;
+  --color-main: #b146ea;
 
   --input-border-bottom-color: #383838;
-  --input-border-bottom-color-active: #b146ea;
+  --input-border-bottom-color-active: var(--color-main);
 
   // Клетка даты
-  --color-current-date-cell: #b146ea;
+  --color-current-date-cell: var(--color-main);
   --color-current-date-cell-hover: #b866e4;
 }
 

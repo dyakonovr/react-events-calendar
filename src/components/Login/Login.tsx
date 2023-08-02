@@ -17,13 +17,9 @@ function Login() {
         const user = userCredential.user;
         setUser(user.refreshToken, user.uid, user.email || "");
         createToast(`Вы успешно вошли в аккаунт ${user.email}`);
-        window.localStorage.setItem("uid", user.uid);
         navigate(Paths.HOME);
       })
-      .catch((error) => {
-        console.error(error);
-        createToast(`Ошибка: ${error.message}`);
-      });
+      .catch((error) => { createToast(`Ошибка: ${error.message}`); });
   }
   // Функции END
 

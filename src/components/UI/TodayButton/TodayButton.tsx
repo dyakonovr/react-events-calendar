@@ -1,4 +1,4 @@
-import { useMonthStore } from "../../../store/useDateStore";
+import { useMonthStore } from "../../../store/useMonthStore";
 
 function TodayButton() {
   const setCurrentMonth = useMonthStore(state => state.setCurrentMonth);
