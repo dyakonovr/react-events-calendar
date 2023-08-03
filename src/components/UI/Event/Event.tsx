@@ -2,6 +2,7 @@ import { IDateObject } from "../../../interfaces/IDateObject";
 import { IEvent } from "../../../interfaces/IEvent";
 import { useEventsStore } from "../../../store/useEventsStore";
 import { useModalStore } from "../../../store/useModalStore";
+import { getNormalTime } from "../../../utils/getNormalTime";
 import classes from './Event.module.scss';
 
 interface IEventProps {
@@ -13,8 +14,7 @@ function Event({ object, dateObject }: IEventProps) {
   const openModal = useModalStore(state => state.openModal);
   const setIsModalForEdit = useEventsStore(state => state.setIsModalForEdit);
 
-  const hours = object.hours >= 10 ? object.hours : `0${object.hours}`;
-  const minutes = object.minutes >= 10 ? object.minutes : `0${object.minutes}`;
+  const time = getNormalTime(object.hours, object.minutes);
 
   // Функции
   function handleClick() {
@@ -26,10 +26,10 @@ function Event({ object, dateObject }: IEventProps) {
   return (
     <div
       className={classes.event}
-      title={`${hours}:${minutes} ${object.message}`}
+      title={`${time} ${object.message}`}
       onClick={handleClick}
     >
-      {hours}:{minutes} {object.message}
+      {time} {object.message}
     </div>
   );
 };

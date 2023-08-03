@@ -4,6 +4,8 @@ import { useEventsStore } from "../../store/useEventsStore";
 import { useModalStore } from "../../store/useModalStore";
 import Event from "../UI/Event/Event";
 import classes from './Cell.module.scss';
+import "./CustomScroll.scss";
+import { getNormalTime } from "../../utils/getNormalTime";
 
 interface ICellProps {
   object: CellModel,
@@ -25,14 +27,21 @@ function Cell({ object, isCurrentDate }: ICellProps) {
     const result = events.filter((event) => event.day === day && event.month === month && event.year === year);
     
     result.sort((objectA, objectB) => {
-      const timeA = `${objectA.hours}:${objectA.minutes}`;
-      const timeB = `${objectB.hours}:${objectB.minutes}`;
+      const timeA = getNormalTime(objectA.hours, objectA.minutes);
+      const timeB = getNormalTime(objectB.hours, objectB.minutes);
 
       if (timeA > timeB) return 1;
       if (timeA < timeB) return -1;
       return 0;
     });
 
+    // if (result.length > 4) {
+    //   return (
+    //     <Scrollbar className={classes.events_wrapper}>
+    //       {result?.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />)}
+    //     </Scrollbar>
+    //   );
+    // }
     return result?.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />);
   }
   // Функции END
@@ -45,7 +54,9 @@ function Cell({ object, isCurrentDate }: ICellProps) {
       >
         {object.day}
       </span>
-      {getEvents()}
+      <div className={classes.events_wrapper}>
+        {getEvents()}
+      </div>
     </div>
   );
 };

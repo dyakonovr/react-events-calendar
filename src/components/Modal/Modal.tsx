@@ -35,7 +35,8 @@ function Modal() {
     function handleKeyboardClick(event: KeyboardEvent) {
       if (event.key === "Escape") closeModalFunc();
       if (event.key === "Enter") {
-        if(event.target === saveButtonRef.current) event.preventDefault(); // Предотвращаю двойной вызов функции (по клику на кнопку и на Enter)
+        // Предотвращаю двойной вызов функции (по клику на кнопку и на Enter при фокусе)
+        if(event.target === saveButtonRef.current) event.preventDefault();
         handleSaveButtonClick();
       }
       else return;
@@ -113,10 +114,10 @@ function Modal() {
         <div className={classes.buttons_wrapper}>
           <button className={[classes.button, "button"].join(' ')} onClick={handleSaveButtonClick} ref={saveButtonRef} type="button">Сохранить</button>
           {isDeleteButtonIsShowed && <button
-              className={[classes.button, "button"].join(' ')}
-              type="button"
-              onClick={() => handleDeleteButtonClick(eventForEditId)}
-            >
+            className={[classes.button, "button"].join(' ')}
+            type="button"
+            onClick={() => handleDeleteButtonClick(eventForEditId)}
+          >
             Удалить
           </button>}
         </div>

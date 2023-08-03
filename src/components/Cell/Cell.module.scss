@@ -38,3 +38,9 @@
     opacity: 0.3;
   }
 }
+
+.events_wrapper {
+  max-height: 65%;
+  overflow-y: auto;
+  overflow-anchor: none;
+}

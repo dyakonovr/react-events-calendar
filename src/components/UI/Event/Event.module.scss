@@ -11,6 +11,8 @@
   text-overflow: ellipsis;
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
+  overflow-anchor: none;
+
 
   &:hover {
     background-color: var(--color-current-date-cell-hover);

@@ -1,0 +1,10 @@
+.ScrollbarsCustom-Track {
+  width: 3px !important;
+  height: calc(100% - 5px) !important;
+  top: 0 !important;
+  right: 4px !important;
+}
+
+.ScrollbarsCustom-Thumb {
+  background: var(--secondary-color) !important;
+}
