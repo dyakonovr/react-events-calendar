@@ -1,5 +1,5 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useEffect, useReducer, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { database } from "../../firebase";
 import { IEvent } from "../../interfaces/IEvent";
 import { CalendarModel } from "../../models/CalendarModel";
@@ -23,15 +23,6 @@ function Calendar() {
   useEffect(() => {
     createNewCalendar();
   }, [currentDate, currentMonth]); // currentDate для смены отметки сегодняшней клетки 
-
-  //////////////////////////////////////////////////////////////
-
-  const [_, forceUpdate] = useReducer(x => x + 1, 0);
-  const events = useEventsStore(state => state.events);
-
-  useEffect(() => {
-    forceUpdate();
-  }, [events]);
 
   //////////////////////////////////////////////////////////////
 
@@ -114,4 +105,4 @@ function Calendar() {
   );
 };
 
-export default Calendar;
+export default memo(Calendar);

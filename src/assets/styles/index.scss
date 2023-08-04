@@ -7,8 +7,22 @@ body {
   display: flex;
   flex-direction: column;
   overflow-anchor: none;
+  scroll-behavior: smooth;
 }
 
 .change-theme-animation {
   transition: background-color 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar {
+  width: 1.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--main-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background: var(--secondary-color);
 }

@@ -1,11 +1,11 @@
+import { memo, useEffect, useReducer } from "react";
 import { IDateObject } from "../../interfaces/IDateObject";
 import { CellModel } from "../../models/CellModel";
 import { useEventsStore } from "../../store/useEventsStore";
 import { useModalStore } from "../../store/useModalStore";
+import { getNormalTime } from "../../utils/getNormalTime";
 import Event from "../UI/Event/Event";
 import classes from './Cell.module.scss';
-import "./CustomScroll.scss";
-import { getNormalTime } from "../../utils/getNormalTime";
 
 interface ICellProps {
   object: CellModel,
@@ -22,10 +22,17 @@ function Cell({ object, isCurrentDate }: ICellProps) {
   const isInactiveCellClass = object.isInactiveDate ? classes.date_inactive : "";
   const isCurrentDateClass = isCurrentDate ? classes.date_current : "";
 
+  const [_, forceUpdate] = useReducer(x => x + 1, 0);
+
+  useEffect(() => {
+    forceUpdate();
+  }, [events]);
+
   // Функции
   function getEvents() {
     const result = events.filter((event) => event.day === day && event.month === month && event.year === year);
-    
+    if (!result) return;
+
     result.sort((objectA, objectB) => {
       const timeA = getNormalTime(objectA.hours, objectA.minutes);
       const timeB = getNormalTime(objectB.hours, objectB.minutes);
@@ -35,14 +42,11 @@ function Cell({ object, isCurrentDate }: ICellProps) {
       return 0;
     });
 
-    // if (result.length > 4) {
-    //   return (
-    //     <Scrollbar className={classes.events_wrapper}>
-    //       {result?.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />)}
-    //     </Scrollbar>
-    //   );
-    // }
-    return result?.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />);
+    return (
+      <div className={[classes.events_wrapper, result.length > 4 ? classes.events_wrapper_with_scroll : ""].join(' ')}>
+        {result.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />)}
+      </div>
+    );
   }
   // Функции END
 
@@ -54,11 +58,9 @@ function Cell({ object, isCurrentDate }: ICellProps) {
       >
         {object.day}
       </span>
-      <div className={classes.events_wrapper}>
-        {getEvents()}
-      </div>
+      {getEvents()}
     </div>
   );
 };
 
-export default Cell;
+export default memo(Cell);

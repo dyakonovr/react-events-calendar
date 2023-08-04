@@ -41,6 +41,10 @@
 
 .events_wrapper {
   max-height: 65%;
-  overflow-y: auto;
   overflow-anchor: none;
+
+  &_with_scroll {
+    max-width: 97%;
+    overflow-y: scroll;
+  }
 }
