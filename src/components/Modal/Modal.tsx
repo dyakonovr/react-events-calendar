@@ -107,7 +107,7 @@ function Modal() {
     <div className={classes.modal} onClick={closeModalFunc}> {/* closeModalFunc для outside-клика */}
       <div className={classes.modal_wrapper} onClick={(e) => e.stopPropagation()}>
         <button className={classes.delete_button} onClick={closeModal} type='button'></button>
-        <input className="input" placeholder="Введите событие" ref={eventInputRef} defaultValue={eventForEditObject?.message || ""} />
+        <input className={["input", classes.modal_input].join(' ')} placeholder="Введите событие" ref={eventInputRef} defaultValue={eventForEditObject?.message || ""} />
         <p className={classes.text}>{getFullDate(currentDate)}</p>
         <p className={classes.text}>Время - <TimePickerInput myRef={timePickerInputRef} initialTime={initialTime} /></p>
         

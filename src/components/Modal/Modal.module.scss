@@ -1,5 +1,5 @@
 .modal {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   display: flex;
@@ -21,6 +21,10 @@
     width: 100%;
     background-color: var(--primary-color);
   }
+}
+
+.modal_input {
+  margin: 0 0 15px;
 }
 
 .text {

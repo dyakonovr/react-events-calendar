@@ -8,7 +8,7 @@ import { useEventsStore } from "../../store/useEventsStore";
 import { useMonthStore } from "../../store/useMonthStore";
 import { useUserStore } from "../../store/useUserStore";
 import { createEventNotification } from "../../utils/createEventNotification";
-import Cell from "../Cell/Cell";
+import Cell from "../UI/Cell/Cell";
 import classes from './Calendar.module.scss';
 
 function Calendar() {
@@ -95,10 +95,10 @@ function Calendar() {
   }
   // Функции END
   
-  const gridTemplateRowsStyle = { gridTemplateRows: `20px repeat(${((calendar?.cells && calendar?.cells.length / 7) || 5)}, 1fr` };
+  const gridTemplateRowsClass = calendar?.cells.length ? classes[`rows_${calendar.cells.length / 7}`] : classes["rows_5"];
 
   return (
-    <div className={classes.calendar} style={gridTemplateRowsStyle}>
+    <div className={[classes.calendar, gridTemplateRowsClass].join(' ')}>
       {createHeaders()}
       {createCells()}
     </div>

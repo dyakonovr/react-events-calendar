@@ -40,11 +40,14 @@
 }
 
 .events_wrapper {
-  max-height: 65%;
+  max-height: 70%;
   overflow-anchor: none;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 97%;
+  overflow-y: scroll;
 
-  &_with_scroll {
-    max-width: 97%;
-    overflow-y: scroll;
+  @media (max-height: 650px) {
+    max-height: 55%;
   }
 }

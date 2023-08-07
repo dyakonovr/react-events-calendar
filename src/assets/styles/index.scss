@@ -8,6 +8,13 @@ body {
   flex-direction: column;
   overflow-anchor: none;
   scroll-behavior: smooth;
+  overflow: hidden;
+  min-width: 700px;
+  padding: 0 20px;
+
+  @media (max-height: 700px) {
+    overflow-y: auto;
+  }
 }
 
 .change-theme-animation {

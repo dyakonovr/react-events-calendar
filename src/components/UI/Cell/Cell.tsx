@@ -1,10 +1,10 @@
 import { memo, useEffect, useReducer } from "react";
-import { IDateObject } from "../../interfaces/IDateObject";
-import { CellModel } from "../../models/CellModel";
-import { useEventsStore } from "../../store/useEventsStore";
-import { useModalStore } from "../../store/useModalStore";
-import { getNormalTime } from "../../utils/getNormalTime";
-import Event from "../UI/Event/Event";
+import { IDateObject } from "../../../interfaces/IDateObject";
+import { CellModel } from "../../../models/CellModel";
+import { useEventsStore } from "../../../store/useEventsStore";
+import { useModalStore } from "../../../store/useModalStore";
+import { getNormalTime } from "../../../utils/getNormalTime";
+import Event from "../Event/Event";
 import classes from './Cell.module.scss';
 
 interface ICellProps {
@@ -43,7 +43,7 @@ function Cell({ object, isCurrentDate }: ICellProps) {
     });
 
     return (
-      <div className={[classes.events_wrapper, result.length > 4 ? classes.events_wrapper_with_scroll : ""].join(' ')}>
+      <div className={classes.events_wrapper}>
         {result.map((event) => <Event object={event} dateObject={dateObject} key={Math.random()} />)}
       </div>
     );
